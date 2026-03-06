@@ -1,0 +1,5 @@
+{
+  "name": "Aegis Panoptic Intelligence",
+  "description": "Advanced geospatial intelligence dashboard with real-time tracking, traffic surveillance, and multi-spectral imaging (EO/FLIR/CRT).",
+  "requestFramePermissions": ["geolocation"]
+}

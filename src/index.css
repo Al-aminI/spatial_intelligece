@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-intel-bg: #05070a;
+  --color-intel-green: #00ff41;
+  --color-intel-amber: #ffb000;
+  --color-intel-red: #ff3e3e;
+  --color-intel-blue: #00e5ff;
+  --color-intel-cyan: #00f0ff;
+  --color-intel-dark: #0a0f14;
+  --color-intel-border: rgba(0, 240, 255, 0.2);
+}
+
+@layer base {
+  body {
+    @apply bg-intel-bg text-intel-cyan font-mono overflow-hidden;
+  }
+}
+
+/* Circular Map Mask */
+.map-mask {
+  mask-image: radial-gradient(circle at center, black 45%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 70%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-intel-border);
+  border-radius: 2px;
+}
+
+/* CRT Scanline Effect */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.98; }
+  20% { opacity: 0.94; }
+  25% { opacity: 0.95; }
+  30% { opacity: 0.9; }
+  35% { opacity: 0.93; }
+  40% { opacity: 0.98; }
+  45% { opacity: 0.95; }
+  50% { opacity: 0.9; }
+  55% { opacity: 0.92; }
+  60% { opacity: 0.99; }
+  65% { opacity: 0.96; }
+  70% { opacity: 0.91; }
+  75% { opacity: 0.94; }
+  80% { opacity: 0.98; }
+  85% { opacity: 0.95; }
+  90% { opacity: 0.9; }
+  95% { opacity: 0.97; }
+  100% { opacity: 1; }
+}
+
+.flir-mode {
+  filter: brightness(1.2) contrast(1.5) hue-rotate(180deg) saturate(2);
+}
+
+.crt-mode {
+  filter: sepia(1) hue-rotate(90deg) brightness(1.2) contrast(1.2);
+}
+
+.nvg-mode {
+  filter: sepia(1) hue-rotate(50deg) saturate(3) brightness(0.8) contrast(1.5);
+}
+
+.noir-mode {
+  filter: grayscale(1) contrast(1.5) brightness(0.9);
+}
+
+.intel-panel {
+  @apply bg-intel-dark/80 backdrop-blur-md border border-intel-border rounded-xl shadow-[0_0_15px_rgba(0,240,255,0.1)];
+}
+
+.intel-button {
+  @apply px-3 py-1 border border-intel-border hover:bg-intel-cyan/10 transition-all uppercase text-[10px] tracking-widest rounded-md;
+}
+
+.intel-button.active {
+  @apply bg-intel-cyan text-black shadow-[0_0_10px_rgba(0,240,255,0.5)];
+}
+
+/* Map specific styles */
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(200%); }
+}
+
+.animate-scan {
+  animation: scan 4s linear infinite;
+}
